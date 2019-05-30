@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="buy" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="_03mavenjavaweb" target="1.5" />
+      <module name="buy" target="1.8" />
+      <module name="demo" target="1.8" />
+      <module name="demo1" target="1.7" />
+      <module name="springboot" target="1.8" />
+      <module name="springboot2" target="1.8" />
+      <module name="ssm" target="1.8" />
+      <module name="staticdemo" target="1.8" />
+      <module name="test" target="1.8" />
+      <module name="testdemo" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="buy" options="-parameters" />
+      <module name="demo1" options="-parameters" />
+      <module name="springboot" options="-parameters" />
+      <module name="springboot2" options="-parameters" />
+      <module name="ssm" options="-parameters" />
+      <module name="staticdemo" options="-parameters" />
+      <module name="test" options="-parameters" />
+      <module name="testdemo" options="-parameters" />
+    </option>
+  </component>
+</project>

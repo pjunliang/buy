@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 根标签，在内部配置MyBatis框架信息 -->
+<configuration>
+
+    <!-- MyBatis的其他设置（日志框架的设置） -->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <!-- 别名设置  -->
+    <typeAliases>
+        <!-- 设置单个类的别名 
+			type ：要设置别名的全限定名
+			alias ：别名 
+		-->
+        <typeAlias type="cn.yq.mybatis.domain.User" alias="User"/>
+    </typeAliases>
+
+    <!-- 配置MyBatis的环境，
+		default ：此标签下面可能多个环境，默认使用环境
+	 -->
+    <environments default="mysql">
+        <!-- 具体的环境配置，配置一些数据库连接细节
+  		id ：环境的id，以供  <environments>的default 属性使用
+  	 -->
+        <environment id="mysql">
+            <!-- 配置事务管理器
+    		type ： 事务管理器的类型，使用的MyBatis框架自定义的一种别名
+    		   JDBC :使用原生的JDBC作为事务管理
+    	 -->
+            <transactionManager type="JDBC"/>
+            <!-- 配置数据源（连接池）
+      	type ： 数据源支持商（druid，dbcp，c3p0）
+      		POOLED :使用的MyBatis框架自定义的一种别名， MyBatis内置的微型连接池
+       -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 配置MyBatis映射文件 -->
+    <mappers>
+        <!-- 配置具体的映射文件 -->
+        <mapper resource="cn/yq/mybatis/mapper/UserMapper.xml"/>
+    </mappers>
+</configuration>
