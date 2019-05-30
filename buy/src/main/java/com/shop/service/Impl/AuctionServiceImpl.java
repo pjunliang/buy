@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -89,8 +90,9 @@ public class AuctionServiceImpl implements AuctionService {
             throw new AuctionCustomException("竞拍结束！！！");
         }
         if(auction.getAuctionrecodList()!=null&&auction.getAuctionrecodList().size()>0){
-            Auctionrecord ar = auction.getAuctionrecodList().get(0);
-            if(ar.getAuctionprice().compareTo(auctionrecord.getAuctionprice())>1){
+            BigDecimal auctionprice = auction.getAuctionrecodList().get(0).getAuctionprice();
+            System.out.println("出价============"+auctionprice);
+            if(auctionprice.compareTo(auctionrecord.getAuctionprice())>=1){
                 throw new AuctionCustomException("竞拍价格不能低于最高竞拍价！");
             }
         }
