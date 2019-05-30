@@ -54,8 +54,8 @@
         <ul class="rows" th:each="auction,state:${auctions}" th:class="${state.odd?'rows':'rows even'}">
             <li><a href="国书" title="" th:text="${auction.auctionname}"></a></li>
             <li class="list-wd" th:text="${auction.auctiondesc}"></li>
-            <li th:text="${#dates.format(auction.auctionstarttime,'yyyy-mm-dd hh:mm:ss')}"></li>
-            <li th:text="${#dates.format(auction.auctionendtime,'yyyy-mm-dd hh:mm:ss')}"></li>
+            <li th:text="${#dates.format(auction.auctionstarttime,'yyyy-MM-dd hh:mm:ss')}"></li>
+            <li th:text="${#dates.format(auction.auctionendtime,'yyyy-MM-dd hh:mm:ss')}"></li>
             <li th:text="${auction.auctionstartprice}">2,000</li>
             <li class="borderno red" th:if="${session.user.userisadmin == 1}">
                 <a href="#" title="竞拍" onclick="dele();">修改</a>|

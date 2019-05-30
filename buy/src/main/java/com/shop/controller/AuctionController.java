@@ -60,9 +60,11 @@ public class AuctionController {
         Auctionrecord auctionrecord = new Auctionrecord();
         auctionrecord.setAuctionid(auctionid);
         auctionrecord.setAuctiontime(new Date());
+        auctionrecord.setAuctionprice(auctionprice);
         User user = (User) session.getAttribute("user");
         auctionrecord.setUserid(user.getUserid());
+        System.out.println(auctionrecord);
         auctionService.bidding(auctionrecord);
-        return "/auctionDetails"+auctionid;
+        return "redirect:/auctionDetails/"+auctionid;
     }
 }

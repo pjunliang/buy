@@ -7,6 +7,7 @@ import com.shop.pojo.Auction;
 import com.shop.pojo.AuctionExample;
 import com.shop.pojo.Auctionrecord;
 import com.shop.service.AuctionService;
+import com.shop.tools.AuctionCustomException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -84,17 +85,17 @@ public class AuctionServiceImpl implements AuctionService {
     public Integer bidding(Auctionrecord auctionrecord) throws Exception {
         Auction auction = auctionCustomerMapper.getAuctionDetails(auctionrecord.getAuctionid());
 
-        if(auction.getAuctionendtime().after(new Date())){
-            throw new Exception("竞拍结束！！！");
+        if(auction.getAuctionendtime().before(new Date())){
+            throw new AuctionCustomException("竞拍结束！！！");
         }
         if(auction.getAuctionrecodList()!=null&&auction.getAuctionrecodList().size()>0){
             Auctionrecord ar = auction.getAuctionrecodList().get(0);
-            if(ar.getAuctionprice().compareTo(auctionrecord.getAuctionprice())<1){
-                throw new Exception("竞拍价格不能低于最高竞拍价！");
+            if(ar.getAuctionprice().compareTo(auctionrecord.getAuctionprice())>1){
+                throw new AuctionCustomException("竞拍价格不能低于最高竞拍价！");
             }
         }
         if(auctionrecord.getAuctionprice().compareTo(auction.getAuctionstartprice())<1){
-            throw new Exception("出价不能小于竞拍价");
+            throw new AuctionCustomException("出价不能小于竞拍价");
         }
         int row = auctionrecordMapper.insert(auctionrecord);
 
