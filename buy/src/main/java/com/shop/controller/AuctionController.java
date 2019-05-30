@@ -3,6 +3,8 @@ package com.shop.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shop.pojo.Auction;
+import com.shop.pojo.Auctionrecord;
+import com.shop.pojo.User;
 import com.shop.service.AuctionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -49,5 +54,15 @@ public class AuctionController {
         System.out.println("auctionDetails=========================="+auctionDetails);
         model.addAttribute("auctionDetail",auctionDetails);
         return "auctionDetail";
+    }
+    @RequestMapping(value = "/saveAuctionRecord")
+    public String saveAuctionRecord(HttpSession session, BigDecimal auctionprice, Integer auctionid) throws Exception {
+        Auctionrecord auctionrecord = new Auctionrecord();
+        auctionrecord.setAuctionid(auctionid);
+        auctionrecord.setAuctiontime(new Date());
+        User user = (User) session.getAttribute("user");
+        auctionrecord.setUserid(user.getUserid());
+        auctionService.bidding(auctionrecord);
+        return "/auctionDetails"+auctionid;
     }
 }

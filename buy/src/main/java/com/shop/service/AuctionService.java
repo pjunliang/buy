@@ -31,5 +31,5 @@ public interface AuctionService {
      * 竞拍
      * @return
      */
-   Integer bidding(Auctionrecord auctionrecord);
+   Integer bidding(Auctionrecord auctionrecord) throws Exception;
 }
